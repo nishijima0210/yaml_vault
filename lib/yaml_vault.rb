@@ -177,12 +177,12 @@ module YamlVault
         end
 
         def encrypt(value)
-          response = @client.encrypt_crypto_key(@resource_id, {plaintext: YAML.dump(value)}, {})
+          response = @client.encrypt_crypto_key(@resource_id, {plaintext: YAML.dump(value)})
           Base64.strict_encode64(response.ciphertext)
         end
 
         def decrypt(value)
-          response = @client.decrypt_crypto_key(@resource_id, {ciphertext: Base64.strict_decode64(value)}, {})
+          response = @client.decrypt_crypto_key(@resource_id, {ciphertext: Base64.strict_decode64(value)})
           YAML.load(response.plaintext)
         end
       end
